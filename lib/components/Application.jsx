@@ -35,13 +35,19 @@ class Application extends React.Component {
     if (userNumber > this.state.max) {
       this.setState({messageToUser: "Your number is above the accepted range."});
     }
+    else if (userNumber < this.state.min) {
+      this.setState({messageToUser: "Your number is below the accepted range."});
+    }
     else if (userNumber < computerNumber) {
-      console.log("Sorry, your guess is too low. Please try again.");
+      this.setState({messageToUser: "Sorry, your guess is too low. Please try again."});
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber > computerNumber) {
-      console.log("Sorry, your guess is too high. Please try again.");
+      this.setState({messageToUser: "Sorry, your guess is too high. Please try again."});
       console.log("The computer chose: " + computerNumber);
+    }
+    else if (userNumber === computerNumber) {
+      alert('You win! Now get ready for a new challenge.');
     }
   } //end of evaluateTheTwoNumbers
 
