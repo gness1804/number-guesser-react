@@ -17,7 +17,9 @@ class Application extends React.Component {
   setUserNumberState(e){
     let userNumber = parseInt(e.target.value);
     if (isNaN(userNumber)) {
-      
+      // alert('Please choose a valid number.');
+      e.target.value = '';
+      return;
     }
   }
 
@@ -28,7 +30,7 @@ class Application extends React.Component {
         <div className="number-output-area">
           <NumberOutputArea/>
         </div>
-        <Input value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
+        <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
         <SubmitGuessButton/>
         <ClearInputButton/>
         <ResetGameButton/>
