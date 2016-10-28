@@ -48,6 +48,7 @@ class Application extends React.Component {
     }
     else if (userNumber === computerNumber) {
       alert('You win! Now get ready for a new challenge.');
+      this.startNewGameAfterWin();
     }
   } //end of evaluateTheTwoNumbers
 
@@ -56,6 +57,10 @@ class Application extends React.Component {
     let max = this.state.max;
     let newComputerNumber = Math.floor(Math.random() * (max - min) + min);
     this.setState({computerNumber: newComputerNumber});
+  }
+
+  resetGameToInitialState(){
+    //TODO
   }
 
   setUserNumberState(e){
@@ -70,6 +75,14 @@ class Application extends React.Component {
     }
 
   } //end of setUserNumberState
+
+  startNewGameAfterWin(){
+    this.setState({userNumber: null});
+    this.setState({computerNumber: null});
+    this.setState({messageToUser: ''});
+    this.setState({min: this.state.min - 10});
+    this.setState({max: this.state.max + 10});
+  }
 
   render () {
     return (
