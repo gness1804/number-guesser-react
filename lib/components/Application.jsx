@@ -17,11 +17,15 @@ class Application extends React.Component {
   setUserNumberState(e){
     let userNumber = parseInt(e.target.value);
     if (isNaN(userNumber)) {
-      // alert('Please choose a valid number.');
-      e.target.value = '';
+      alert('Please choose a valid number.');
+      e.target.value = ''; //TODO: break out into own function
       return;
     }
-  }
+    else {
+      this.setState({userNumber: userNumber});
+    }
+    
+  } //end of setUserNumberState
 
   render () {
     return (
