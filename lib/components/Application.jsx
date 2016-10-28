@@ -8,7 +8,13 @@ class Application extends React.Component {
 
   render () {
     return (
-      <div>Hello</div>
+      <div>
+        <h1>Number Guesser in React</h1>
+        <Input />
+        <SubmitGuessButton/>
+        <ClearInputButton/>
+        <ResetGameButton/>
+      </div>
     );
   }
 } //end of Application
