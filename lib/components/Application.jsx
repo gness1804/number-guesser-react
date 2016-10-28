@@ -14,6 +14,14 @@ class Application extends React.Component {
 
   } //end of constructor
 
+  componentDidMount(){
+
+  } //end of componentDidMount
+
+  compareNumbers(){
+    console.log(this.state.userNumber);
+  }
+
   setUserNumberState(e){
     let userNumber = parseInt(e.target.value);
     if (isNaN(userNumber)) {
@@ -24,7 +32,7 @@ class Application extends React.Component {
     else {
       this.setState({userNumber: userNumber});
     }
-    
+
   } //end of setUserNumberState
 
   render () {
@@ -35,7 +43,7 @@ class Application extends React.Component {
           <NumberOutputArea/>
         </div>
         <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
-        <SubmitGuessButton/>
+        <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
         <ClearInputButton/>
         <ResetGameButton/>
 
