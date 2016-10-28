@@ -11,8 +11,8 @@ class NumberOutputArea extends React.Component {
       <div>
         <p>Min: {this.props.min} Max: {this.props.max}</p>
         <p>Your last guess was...</p>
-        <p id="number-output-field"></p>
-        <p></p>
+        <p id="number-output-field">{this.props.userNumber}</p>
+        <p>{this.props.messageToUser}</p>
       </div>
     );
   }
@@ -20,7 +20,9 @@ class NumberOutputArea extends React.Component {
 
 NumberOutputArea.propTypes = {
   max: React.PropTypes.number,
-  min: React.PropTypes.number
+  messageToUser: React.PropTypes.string,
+  min: React.PropTypes.number,
+  userNumber: React.PropTypes.number,
 }
 
 module.exports = NumberOutputArea;
