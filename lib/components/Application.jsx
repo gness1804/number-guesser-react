@@ -31,7 +31,10 @@ class Application extends React.Component {
   }
 
   evaluateTheTwoNumbers(userNumber, computerNumber){
-    if (userNumber < computerNumber) {
+    if (userNumber > this.state.max) {
+      console.log("Your number is above the accepted range.");
+    }
+    else if (userNumber < computerNumber) {
       console.log("Sorry, your guess is too low. Please try again.");
       console.log("The computer chose: " + computerNumber);
     }
@@ -66,7 +69,7 @@ class Application extends React.Component {
       <div>
         <h1>Number Guesser in React</h1>
         <div className="number-output-area">
-          <NumberOutputArea/>
+          <NumberOutputArea max={this.state.max} min={this.state.min}/>
         </div>
         <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
         <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
