@@ -9,7 +9,10 @@ class Application extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNumber: null
+      userNumber: null,
+      computerNumber: null,
+      min: 0,
+      max: 100
     };
 
   } //end of constructor
@@ -19,7 +22,15 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
+    this.generateRandomNumber();
     let userNumber = this.state.userNumber;
+    let computerNumber = this.state.computerNumber;
+  }
+
+  generateRandomNumber(){
+    let min = this.state.min;
+    let max = this.state.max;
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
   setUserNumberState(e){
