@@ -14,8 +14,11 @@ class Application extends React.Component {
 
   } //end of constructor
 
-  setUserNumberState(){
-    
+  setUserNumberState(e){
+    let userNumber = parseInt(e.target.value);
+    if (isNaN(userNumber)) {
+      
+    }
   }
 
   render () {

@@ -9,7 +9,7 @@ class Input extends React.Component {
   render () {
     return (
       <div>
-        <input onChange={()=>this.props.handleChange()}/>
+        <input onChange={(e)=>this.props.handleChange(e)}/>
       </div>
     );
   }
