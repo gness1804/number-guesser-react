@@ -19,7 +19,7 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    console.log(this.state.userNumber);
+    let userNumber = this.state.userNumber;
   }
 
   setUserNumberState(e){
