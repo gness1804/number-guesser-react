@@ -10,7 +10,7 @@ class NumberOutputArea extends React.Component {
     return (
       <div>
         <p>Your last guess was...</p>
-        <p>14</p>
+        <p id="number-output-field"></p>
         <p>Sorry, that guess is too low. Try again.</p>
       </div>
     );

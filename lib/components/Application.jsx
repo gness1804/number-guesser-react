@@ -8,7 +8,14 @@ import ResetGameButton from './ResetGameButton';
 class Application extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      userNumber: null
+    };
 
+  } //end of constructor
+
+  setUserNumberState(){
+    
   }
 
   render () {
@@ -18,11 +25,11 @@ class Application extends React.Component {
         <div className="number-output-area">
           <NumberOutputArea/>
         </div>
-        <Input />
+        <Input value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
         <SubmitGuessButton/>
         <ClearInputButton/>
         <ResetGameButton/>
-        
+
       </div>
     );
   }
