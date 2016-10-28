@@ -18,4 +18,9 @@ class NumberOutputArea extends React.Component {
   }
 } //end of NumberOutputArea
 
+NumberOutputArea.propTypes = {
+  max: React.PropTypes.number,
+  min: React.PropTypes.number
+}
+
 module.exports = NumberOutputArea;
