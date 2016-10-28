@@ -22,15 +22,30 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    this.generateRandomNumber();
+    if (this.state.computerNumber === null) {
+      this.generateRandomNumber();
+    }
     let userNumber = this.state.userNumber;
     let computerNumber = this.state.computerNumber;
+    this.evaluateTheTwoNumbers(userNumber, computerNumber);
   }
+
+  evaluateTheTwoNumbers(userNumber, computerNumber){
+    if (userNumber < computerNumber) {
+      console.log("Sorry, your guess is too low. Please try again.");
+      console.log("The computer chose: " + computerNumber);
+    }
+    else if (userNumber > computerNumber) {
+      console.log("Sorry, your guess is too high. Please try again.");
+      console.log("The computer chose: " + computerNumber);
+    }
+  } //end of evaluateTheTwoNumbers
 
   generateRandomNumber(){
     let min = this.state.min;
     let max = this.state.max;
-    return Math.floor(Math.random() * (max - min) + min);
+    let newComputerNumber = Math.floor(Math.random() * (max - min) + min);
+    this.setState({computerNumber: newComputerNumber});
   }
 
   setUserNumberState(e){
