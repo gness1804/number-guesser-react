@@ -6,6 +6,7 @@ import ClearInputButton from './ClearInputButton';
 import ResetGameButton from './ResetGameButton';
 import UserCustomMaxInput from './UserCustomMaxInput';
 import UserCustomMinInput from './UserCustomMinInput';
+import SubmitCustomMaxMin from './SubmitCustomMaxMin';
 
 class Application extends React.Component {
   constructor(props) {
@@ -23,6 +24,10 @@ class Application extends React.Component {
   componentDidMount(){
 
   } //end of componentDidMount
+
+  adjustMaxMinToUserInput(){
+    
+  }
 
   compareNumbers(){
     if (this.state.computerNumber === null) {
@@ -71,6 +76,7 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: 0});
     this.setState({max: 100});
+    this.refs.inputField.innerText = '';
   }
 
   setUserNumberState(e){
@@ -117,6 +123,7 @@ class Application extends React.Component {
           />
         <UserCustomMaxInput placeholder="Enter your new maximum."/>
         <UserCustomMinInput placeholder="Enter your new minimum."/>
+        <SubmitCustomMaxMin handleClick={()=>this.adjustMaxMinToUserInput()}/>
       </div>
     );
   }
