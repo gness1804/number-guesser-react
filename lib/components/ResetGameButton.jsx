@@ -8,9 +8,14 @@ class ResetGameButton extends React.Component {
 
   render () {
     return (
-      <button onClick={this.props.handleClick}>Reset Game</button>
+      <button onClick={this.props.handleClick} disabled={this.props.isDisabled}>Reset Game</button>
     );
   }
 } //end of ResetGameButton
+
+ResetGameButton.propTypes = {
+  handleClick: React.PropTypes.func,
+  isDisabled: React.PropTypes.bool
+}
 
 module.exports = ResetGameButton;

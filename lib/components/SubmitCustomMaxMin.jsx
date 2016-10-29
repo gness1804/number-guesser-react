@@ -14,7 +14,7 @@ class SubmitCustomMaxMin extends React.Component {
 } //end of SubmitCustomMaxMin
 
 SubmitCustomMaxMin.propTypes = {
-  onClick: React.PropTypes.func,
+  handleClick: React.PropTypes.func,
 }
 
 module.exports = SubmitCustomMaxMin;

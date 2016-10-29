@@ -18,7 +18,9 @@ class Application extends React.Component {
       max: 100,
       messageToUser: '',
       userMin: null,
-      userMax: null
+      userMax: null,
+      clearButtonDisabled: true,
+      resetButtonDisabled: true
     };
 
   } //end of constructor
@@ -35,7 +37,6 @@ class Application extends React.Component {
 
   clearInputField(){
     document.querySelector('.input-field').value = '';
-    // this.setState({userNumber:null});
   }
 
   componentDidMount(){
@@ -55,6 +56,11 @@ class Application extends React.Component {
     }
     // this.clearInputField();
   } //end of compareNumbers
+
+  enableButtons(){
+    this.setState({clearButtonDisabled:false});
+    this.setState({resetButtonDisabled:false});
+  }
 
   evaluateTheTwoNumbers(){
     let userNumber = this.state.userNumber;
@@ -110,7 +116,17 @@ class Application extends React.Component {
   }
 
   setUserNumberState(e){
-    let userNumber = parseInt(e.target.value);
+
+    const items = {
+      thereIsStuffInTheInputField: e.target.value.length > 0
+    };
+
+    if (items.thereIsStuffInTheInputField) {
+      this.enableButtons();
+    }
+
+    let userNumber = parseInt(e.target.value, 10);
+
     if (isNaN(userNumber)) {
       alert('Please choose a valid number.');
       this.clearInputField();
@@ -147,16 +163,16 @@ class Application extends React.Component {
           className="input-field"
           ref="inputField"
           value={this.state.userNumber}
-          handleChange={this.setUserNumberState.bind(this)}
+          handleChange={(e)=>{this.setUserNumberState(e)}}
           placeholder="Your best guess..."
           />
         <SubmitGuessButton
           className="submit-guess-button"
           handleClick={()=>this.compareNumbers()}
           />
-        <ClearInputButton handleClick={()=>this.clearInputField()}/>
+        <ClearInputButton handleClick={()=>this.clearInputField()} isDisabled={this.state.clearButtonDisabled}/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
-          />
+          isDisabled={this.state.resetButtonDisabled}/>
         <UserCustomMinInput
           placeholder="Enter your new minimum."
           ref="UserCustomMinInput"
