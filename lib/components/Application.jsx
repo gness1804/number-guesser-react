@@ -127,12 +127,17 @@ class Application extends React.Component {
             messageToUser={this.state.messageToUser}
             />
         </div>
-        <Input ref="inputField"
+        <Input
+          className="input-field"
+          ref="inputField"
           value={this.state.userNumber}
           handleChange={this.setUserNumberState.bind(this)}
           placeholder="Your best guess..."
           />
-        <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
+        <SubmitGuessButton
+          className="submit-guess-button" 
+          handleClick={()=>this.compareNumbers()}
+          />
         <ClearInputButton/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
           />
