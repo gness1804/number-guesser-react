@@ -35,7 +35,7 @@ class Application extends React.Component {
 
   clearInputField(){
     document.querySelector('.input-field').value = '';
-    this.setState({userNumber:null});
+    // this.setState({userNumber:null});
   }
 
   componentDidMount(){
