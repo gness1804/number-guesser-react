@@ -8,7 +8,7 @@ class ResetGameButton extends React.Component {
 
   render () {
     return (
-      <button>Reset Game</button>
+      <button onClick={this.props.handleClick}>Reset Game</button>
     );
   }
 } //end of ResetGameButton

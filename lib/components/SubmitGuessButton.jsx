@@ -9,7 +9,7 @@ class SubmitGuessButton extends React.Component {
   render () {
     return (
       <div>
-        <button onClick={this.props.handleClick}>Guess</button>
+        <button className="submit-guess-button" onClick={this.props.handleClick}>Guess</button>
       </div>
     );
   }

@@ -6,6 +6,7 @@ import ClearInputButton from './ClearInputButton';
 import ResetGameButton from './ResetGameButton';
 import UserCustomMaxInput from './UserCustomMaxInput';
 import UserCustomMinInput from './UserCustomMinInput';
+import SubmitCustomMaxMin from './SubmitCustomMaxMin';
 
 class Application extends React.Component {
   constructor(props) {
@@ -15,39 +16,51 @@ class Application extends React.Component {
       computerNumber: null,
       min: 0,
       max: 100,
-      messageToUser: ''
+      messageToUser: '',
+      userMin: null,
+      userMax: null
     };
 
   } //end of constructor
+
+  addUserMax(e){
+    let userMax = parseInt(e.target.value, 10);
+    this.setState({userMax:userMax});
+  }
+
+  addUserMin(e){
+    let userMin = parseInt(e.target.value, 10);
+    this.setState({userMin:userMin});
+  }
 
   componentDidMount(){
 
   } //end of componentDidMount
 
+  adjustMaxMinToUserInput(){
+    this.setState({max:this.state.userMax});
+    this.setState({min:this.state.userMin});
+  }
+
   compareNumbers(){
-    // let newComputerNumber = this.generateRandomNumber();
     if (this.state.computerNumber === null) {
-      // this.setState({computerNumber: newComputerNumber}, ()=>{
-      //   console.log(this.state.computerNumber);
-      // });
       this.generateRandomNumber();
     }
     else {
       this.evaluateTheTwoNumbers();
     }
-    // console.log(this.state.computerNumber);
   } //end of compareNumbers
-
-  // this.setState({lastChar: e.target.value.slice(-1)}, function() { console.log(this.state.lastChar)}.bind(this));
 
   evaluateTheTwoNumbers(){
     let userNumber = this.state.userNumber;
     let computerNumber = this.state.computerNumber;
     if (userNumber > this.state.max) {
       this.setState({messageToUser: "Your number is above the accepted range."});
+      console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < this.state.min) {
       this.setState({messageToUser: "Your number is below the accepted range."});
+      console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < computerNumber) {
       this.setState({messageToUser: "Sorry, your guess is too low. Please try again."});
@@ -73,7 +86,12 @@ class Application extends React.Component {
   }
 
   resetGameToInitialState(){
-    //TODO
+    this.setState({userNumber: null});
+    this.setState({computerNumber: null});
+    this.setState({messageToUser: ''});
+    this.setState({min: 0});
+    this.setState({max: 100});
+    this.refs.inputField.value = '';
   }
 
   setUserNumberState(e){
@@ -98,9 +116,8 @@ class Application extends React.Component {
   }
 
   render () {
-    // console.log(this.state.computerNumber);
     return (
-      <div>
+      <div id="container-main">
         <h1>Number Guesser in React</h1>
         <div className="number-output-area">
           <NumberOutputArea
@@ -110,12 +127,31 @@ class Application extends React.Component {
             messageToUser={this.state.messageToUser}
             />
         </div>
-        <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)} placeholder="Your best guess..."/>
-        <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
+        <Input
+          className="input-field"
+          ref="inputField"
+          value={this.state.userNumber}
+          handleChange={this.setUserNumberState.bind(this)}
+          placeholder="Your best guess..."
+          />
+        <SubmitGuessButton
+          className="submit-guess-button" 
+          handleClick={()=>this.compareNumbers()}
+          />
         <ClearInputButton/>
-        <ResetGameButton/>
-        <UserCustomMaxInput/>
-        <UserCustomMinInput/>
+        <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
+          />
+        <UserCustomMinInput
+          placeholder="Enter your new minimum."
+          ref="UserCustomMinInput"
+          handleChange={(e)=>{this.addUserMin(e)}}
+          />
+        <UserCustomMaxInput
+          placeholder="Enter your new maximum."
+          ref="UserCustomMaxInput"
+          handleChange={(e)=>this.addUserMax(e)}
+          />
+        <SubmitCustomMaxMin handleClick={()=>this.adjustMaxMinToUserInput()}/>
       </div>
     );
   }
