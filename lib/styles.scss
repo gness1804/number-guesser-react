@@ -1,2 +1,14 @@
 @import 'variables.scss';
 @import 'mixins.scss';
+
+@media screen and (max-width: 800px) { /* for smartphones and tablets */
+
+  #container-main {
+    text-align: center;
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+} //end of media query

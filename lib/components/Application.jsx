@@ -91,7 +91,7 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: 0});
     this.setState({max: 100});
-    this.refs.inputField.innerText = '';
+    this.refs.inputField.value = '';
   }
 
   setUserNumberState(e){
@@ -117,7 +117,7 @@ class Application extends React.Component {
 
   render () {
     return (
-      <div>
+      <div id="container-main">
         <h1>Number Guesser in React</h1>
         <div className="number-output-area">
           <NumberOutputArea
