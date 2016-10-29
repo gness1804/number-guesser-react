@@ -8,13 +8,13 @@ class UserCustomMaxInput extends React.Component {
 
   render () {
     return (
-      <input placeholder={this.props.placeholder}/>
+      <input placeholder={this.props.placeholder} type="number" onChange={this.props.handleChange}/>
     );
   }
 } //end of UserCustomMaxInput
 
 UserCustomMaxInput.propTypes = {
   placeholder: React.PropTypes.string,
-}
+};
 
 module.exports = UserCustomMaxInput;

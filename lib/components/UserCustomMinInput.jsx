@@ -8,13 +8,13 @@ class UserCustomMinInput extends React.Component {
 
   render () {
     return (
-      <input placeholder={this.props.placeholder}/>
+      <input placeholder={this.props.placeholder} type="number"/>
     );
   }
 } //end of UserCustomMinInput
 
 UserCustomMinInput.propTypes = {
   placeholder: React.PropTypes.string,
-}
+};
 
 module.exports = UserCustomMinInput;

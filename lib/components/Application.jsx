@@ -16,17 +16,23 @@ class Application extends React.Component {
       computerNumber: null,
       min: 0,
       max: 100,
-      messageToUser: ''
+      messageToUser: '',
+      userMin: null,
+      userMax: null
     };
 
   } //end of constructor
+
+  addUserMax(e){
+    console.log(e.target.value);
+  }
 
   componentDidMount(){
 
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
-    
+    // console.log(parseInt(this.refs.UserCustomMaxInput.value, 10));
   }
 
   compareNumbers(){
@@ -121,7 +127,11 @@ class Application extends React.Component {
         <ClearInputButton/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
           />
-        <UserCustomMaxInput placeholder="Enter your new maximum."/>
+        <UserCustomMaxInput
+          placeholder="Enter your new maximum."
+          ref="UserCustomMaxInput"
+          handleChange={(e)=>this.addUserMax(e)}
+          />
         <UserCustomMinInput placeholder="Enter your new minimum."/>
         <SubmitCustomMaxMin handleClick={()=>this.adjustMaxMinToUserInput()}/>
       </div>
