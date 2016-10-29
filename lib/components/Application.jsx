@@ -56,9 +56,11 @@ class Application extends React.Component {
     let computerNumber = this.state.computerNumber;
     if (userNumber > this.state.max) {
       this.setState({messageToUser: "Your number is above the accepted range."});
+      console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < this.state.min) {
       this.setState({messageToUser: "Your number is below the accepted range."});
+      console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < computerNumber) {
       this.setState({messageToUser: "Sorry, your guess is too low. Please try again."});
@@ -134,15 +136,15 @@ class Application extends React.Component {
         <ClearInputButton/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
           />
-        <UserCustomMaxInput
-          placeholder="Enter your new maximum."
-          ref="UserCustomMaxInput"
-          handleChange={(e)=>this.addUserMax(e)}
-          />
         <UserCustomMinInput
           placeholder="Enter your new minimum."
           ref="UserCustomMinInput"
           handleChange={(e)=>{this.addUserMin(e)}}
+          />
+        <UserCustomMaxInput
+          placeholder="Enter your new maximum."
+          ref="UserCustomMaxInput"
+          handleChange={(e)=>this.addUserMax(e)}
           />
         <SubmitCustomMaxMin handleClick={()=>this.adjustMaxMinToUserInput()}/>
       </div>
