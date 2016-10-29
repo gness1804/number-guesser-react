@@ -4,6 +4,8 @@ import Input from './Input';
 import SubmitGuessButton from './SubmitGuessButton';
 import ClearInputButton from './ClearInputButton';
 import ResetGameButton from './ResetGameButton';
+import UserCustomMaxInput from './UserCustomMaxInput';
+import UserCustomMinInput from './UserCustomMinInput';
 
 class Application extends React.Component {
   constructor(props) {
@@ -23,13 +25,12 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    if (this.state.computerNumber === null) {
-      this.generateRandomNumber();
-    }
-    let userNumber = this.state.userNumber;
-    let computerNumber = this.state.computerNumber;
-    this.evaluateTheTwoNumbers(userNumber, computerNumber);
-  }
+    this.setState({computerNumber: 22});
+    // if (this.state.computerNumber === null) {
+    //   this.setState({computerNumber: 22});
+    // }
+    console.log(this.state.computerNumber);
+  } //end of compareNumbers
 
   evaluateTheTwoNumbers(userNumber, computerNumber){
     if (userNumber > this.state.max) {
@@ -96,11 +97,12 @@ class Application extends React.Component {
             messageToUser={this.state.messageToUser}
             />
         </div>
-        <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)}/>
+        <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)} placeholder="Your best guess..."/>
         <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
         <ClearInputButton/>
         <ResetGameButton/>
-
+        <UserCustomMaxInput/>
+        <UserCustomMinInput/>
       </div>
     );
   }
