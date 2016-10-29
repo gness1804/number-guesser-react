@@ -37,6 +37,7 @@ class Application extends React.Component {
 
   clearInputField(){
     document.querySelector('.input-field').value = '';
+    this.disableButtons();
   }
 
   componentDidMount(){
@@ -56,6 +57,11 @@ class Application extends React.Component {
     }
     // this.clearInputField();
   } //end of compareNumbers
+
+  disableButtons(){
+    this.setState({clearButtonDisabled:true});
+    this.setState({resetButtonDisabled:true});
+  }
 
   enableButtons(){
     this.setState({clearButtonDisabled:false});
