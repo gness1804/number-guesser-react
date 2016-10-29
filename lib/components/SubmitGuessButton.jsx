@@ -15,4 +15,8 @@ class SubmitGuessButton extends React.Component {
   }
 } //end of SubmitGuessButton
 
+SubmitGuessButton.propTypes = {
+  handleClick: React.PropTypes.func,
+}
+
 module.exports = SubmitGuessButton;

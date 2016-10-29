@@ -18,7 +18,9 @@ class Application extends React.Component {
       max: 100,
       messageToUser: '',
       userMin: null,
-      userMax: null
+      userMax: null,
+      clearButtonDisabled: true,
+      resetButtonDisabled: true
     };
 
   } //end of constructor
@@ -33,23 +35,38 @@ class Application extends React.Component {
     this.setState({userMin:userMin});
   }
 
+  clearInputField(){
+    document.querySelector('.input-field').value = '';
+    this.disableButtons();
+  }
+
   componentDidMount(){
 
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
-    this.setState({max:this.state.userMax});
-    this.setState({min:this.state.userMin});
+    this.setMaxAndMinStatesToUserInput();
   }
 
   compareNumbers(){
     if (this.state.computerNumber === null) {
-      this.generateRandomNumber();
+      this.generateRandomNumber(this.clearInputField());
     }
     else {
       this.evaluateTheTwoNumbers();
     }
+    // this.clearInputField();
   } //end of compareNumbers
+
+  disableButtons(){
+    this.setState({clearButtonDisabled:true});
+    this.setState({resetButtonDisabled:true});
+  }
+
+  enableButtons(){
+    this.setState({clearButtonDisabled:false});
+    this.setState({resetButtonDisabled:false});
+  }
 
   evaluateTheTwoNumbers(){
     let userNumber = this.state.userNumber;
@@ -91,14 +108,34 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: 0});
     this.setState({max: 100});
-    this.refs.inputField.value = '';
+    this.clearInputField();
+  }
+
+  setMaxAndMinStatesToUserInput(){
+    this.setState({max:this.state.userMax}, ()=>{
+      this.generateRandomNumber();
+    });
+    this.setState({min:this.state.userMin}, ()=>{
+      this.generateRandomNumber();
+    });
+    this.clearInputField();
   }
 
   setUserNumberState(e){
-    let userNumber = parseInt(e.target.value);
+
+    const items = {
+      thereIsStuffInTheInputField: e.target.value.length > 0
+    };
+
+    if (items.thereIsStuffInTheInputField) {
+      this.enableButtons();
+    }
+
+    let userNumber = parseInt(e.target.value, 10);
+
     if (isNaN(userNumber)) {
       alert('Please choose a valid number.');
-      e.target.value = ''; //TODO: break out into own function
+      this.clearInputField();
       return;
     }
     else {
@@ -113,6 +150,7 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: this.state.min - 10});
     this.setState({max: this.state.max + 10});
+    this.clearInputField();
   }
 
   render () {
@@ -131,16 +169,16 @@ class Application extends React.Component {
           className="input-field"
           ref="inputField"
           value={this.state.userNumber}
-          handleChange={this.setUserNumberState.bind(this)}
+          handleChange={(e)=>{this.setUserNumberState(e)}}
           placeholder="Your best guess..."
           />
         <SubmitGuessButton
-          className="submit-guess-button" 
+          className="submit-guess-button"
           handleClick={()=>this.compareNumbers()}
           />
-        <ClearInputButton/>
+        <ClearInputButton handleClick={()=>this.clearInputField()} isDisabled={this.state.clearButtonDisabled}/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
-          />
+          isDisabled={this.state.resetButtonDisabled}/>
         <UserCustomMinInput
           placeholder="Enter your new minimum."
           ref="UserCustomMinInput"
