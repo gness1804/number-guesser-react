@@ -8,7 +8,7 @@ class UserCustomMinInput extends React.Component {
 
   render () {
     return (
-      <input placeholder={this.props.placeholder} type="number"/>
+      <input placeholder={this.props.placeholder} type="number" onChange={this.props.handleChange}/>
     );
   }
 } //end of UserCustomMinInput

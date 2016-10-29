@@ -28,12 +28,18 @@ class Application extends React.Component {
     this.setState({userMax:userMax});
   }
 
+  addUserMin(e){
+    let userMin = parseInt(e.target.value, 10);
+    this.setState({userMin:userMin});
+  }
+
   componentDidMount(){
 
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
     this.setState({max:this.state.userMax});
+    this.setState({min:this.state.userMin});
   }
 
   compareNumbers(){
@@ -133,7 +139,11 @@ class Application extends React.Component {
           ref="UserCustomMaxInput"
           handleChange={(e)=>this.addUserMax(e)}
           />
-        <UserCustomMinInput placeholder="Enter your new minimum."/>
+        <UserCustomMinInput
+          placeholder="Enter your new minimum."
+          ref="UserCustomMinInput"
+          handleChange={(e)=>{this.addUserMin(e)}}
+          />
         <SubmitCustomMaxMin handleClick={()=>this.adjustMaxMinToUserInput()}/>
       </div>
     );
