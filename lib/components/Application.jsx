@@ -33,13 +33,17 @@ class Application extends React.Component {
     this.setState({userMin:userMin});
   }
 
+  clearInputField(){
+    console.log("test");
+    this.refs.inputField.value = '';
+  }
+
   componentDidMount(){
 
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
     this.setMaxAndMinStatesToUserInput();
-    // this.generateRandomNumber();
   }
 
   compareNumbers(){
@@ -49,6 +53,7 @@ class Application extends React.Component {
     else {
       this.evaluateTheTwoNumbers();
     }
+    this.clearInputField();
   } //end of compareNumbers
 
   evaluateTheTwoNumbers(){
@@ -91,7 +96,7 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: 0});
     this.setState({max: 100});
-    this.refs.inputField.value = '';
+    this.clearInputField();
   }
 
   setMaxAndMinStatesToUserInput(){
@@ -101,6 +106,7 @@ class Application extends React.Component {
     this.setState({min:this.state.userMin}, ()=>{
       this.generateRandomNumber();
     });
+    this.clearInputField();
   }
 
   setUserNumberState(e){
@@ -122,6 +128,7 @@ class Application extends React.Component {
     this.setState({messageToUser: ''});
     this.setState({min: this.state.min - 10});
     this.setState({max: this.state.max + 10});
+    this.clearInputField();
   }
 
   render () {
@@ -147,7 +154,7 @@ class Application extends React.Component {
           className="submit-guess-button"
           handleClick={()=>this.compareNumbers()}
           />
-        <ClearInputButton/>
+        <ClearInputButton handleClick={()=>this.clearInputField()}/>
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
           />
         <UserCustomMinInput

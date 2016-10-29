@@ -8,7 +8,7 @@ class ClearInputButton extends React.Component {
 
   render () {
     return (
-      <button>Clear Input</button>
+      <button onClick={this.props.handleClick}>Clear Input</button>
     );
   }
 } //end of ClearInputButton
