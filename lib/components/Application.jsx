@@ -25,20 +25,21 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    // this.setState({computerNumber: 22}, ()=>{
-    //   console.log(this.state.computerNumber);
-    // });
+    // let newComputerNumber = this.generateRandomNumber();
     if (this.state.computerNumber === null) {
-      this.setState({computerNumber: 22}, ()=>{
-        console.log(this.state.computerNumber);
-      });
+      // this.setState({computerNumber: newComputerNumber}, ()=>{
+      //   console.log(this.state.computerNumber);
+      // });
+      this.generateRandomNumber();
     }
     // console.log(this.state.computerNumber);
   } //end of compareNumbers
 
   // this.setState({lastChar: e.target.value.slice(-1)}, function() { console.log(this.state.lastChar)}.bind(this));
 
-  evaluateTheTwoNumbers(userNumber, computerNumber){
+  evaluateTheTwoNumbers(){
+    let userNumber = this.state.userNumber;
+    let computerNumber = this.state.computerNumber;
     if (userNumber > this.state.max) {
       this.setState({messageToUser: "Your number is above the accepted range."});
     }
@@ -63,7 +64,9 @@ class Application extends React.Component {
     let min = this.state.min;
     let max = this.state.max;
     let newComputerNumber = Math.floor(Math.random() * (max - min) + min);
-    this.setState({computerNumber: newComputerNumber});
+    this.setState({computerNumber: newComputerNumber}, ()=>{
+      this.evaluateTheTwoNumbers();
+    });
   }
 
   resetGameToInitialState(){
