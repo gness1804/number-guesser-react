@@ -24,7 +24,8 @@ class Application extends React.Component {
   } //end of constructor
 
   addUserMax(e){
-    console.log(e.target.value);
+    let userMax = parseInt(e.target.value, 10);
+    this.setState({userMax:userMax});
   }
 
   componentDidMount(){
@@ -32,7 +33,7 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
-    // console.log(parseInt(this.refs.UserCustomMaxInput.value, 10));
+    this.setState({max:this.state.userMax});
   }
 
   compareNumbers(){
