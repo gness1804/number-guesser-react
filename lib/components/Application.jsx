@@ -66,7 +66,11 @@ class Application extends React.Component {
   }
 
   resetGameToInitialState(){
-    //TODO
+    this.setState({userNumber: null});
+    this.setState({computerNumber: null});
+    this.setState({messageToUser: ''});
+    this.setState({min: 0});
+    this.setState({max: 100});
   }
 
   setUserNumberState(e){
