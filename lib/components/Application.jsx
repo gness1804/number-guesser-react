@@ -25,20 +25,13 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    // let newComputerNumber = this.generateRandomNumber();
     if (this.state.computerNumber === null) {
-      // this.setState({computerNumber: newComputerNumber}, ()=>{
-      //   console.log(this.state.computerNumber);
-      // });
       this.generateRandomNumber();
     }
     else {
       this.evaluateTheTwoNumbers();
     }
-    // console.log(this.state.computerNumber);
   } //end of compareNumbers
-
-  // this.setState({lastChar: e.target.value.slice(-1)}, function() { console.log(this.state.lastChar)}.bind(this));
 
   evaluateTheTwoNumbers(){
     let userNumber = this.state.userNumber;
@@ -98,7 +91,6 @@ class Application extends React.Component {
   }
 
   render () {
-    // console.log(this.state.computerNumber);
     return (
       <div>
         <h1>Number Guesser in React</h1>
@@ -110,12 +102,17 @@ class Application extends React.Component {
             messageToUser={this.state.messageToUser}
             />
         </div>
-        <Input ref="inputField" value={this.state.userNumber} handleChange={this.setUserNumberState.bind(this)} placeholder="Your best guess..."/>
+        <Input ref="inputField"
+          value={this.state.userNumber}
+          handleChange={this.setUserNumberState.bind(this)}
+          placeholder="Your best guess..."
+          />
         <SubmitGuessButton handleClick={()=>this.compareNumbers()}/>
         <ClearInputButton/>
-        <ResetGameButton/>
-        <UserCustomMaxInput/>
-        <UserCustomMinInput/>
+        <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
+          />
+        <UserCustomMaxInput placeholder="Enter your new maximum."/>
+        <UserCustomMinInput placeholder="Enter your new minimum."/>
       </div>
     );
   }
