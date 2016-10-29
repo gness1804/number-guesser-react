@@ -25,12 +25,18 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   compareNumbers(){
-    this.setState({computerNumber: 22});
-    // if (this.state.computerNumber === null) {
-    //   this.setState({computerNumber: 22});
-    // }
-    console.log(this.state.computerNumber);
+    // this.setState({computerNumber: 22}, ()=>{
+    //   console.log(this.state.computerNumber);
+    // });
+    if (this.state.computerNumber === null) {
+      this.setState({computerNumber: 22}, ()=>{
+        console.log(this.state.computerNumber);
+      });
+    }
+    // console.log(this.state.computerNumber);
   } //end of compareNumbers
+
+  // this.setState({lastChar: e.target.value.slice(-1)}, function() { console.log(this.state.lastChar)}.bind(this));
 
   evaluateTheTwoNumbers(userNumber, computerNumber){
     if (userNumber > this.state.max) {
@@ -86,6 +92,7 @@ class Application extends React.Component {
   }
 
   render () {
+    // console.log(this.state.computerNumber);
     return (
       <div>
         <h1>Number Guesser in React</h1>
