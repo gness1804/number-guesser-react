@@ -38,8 +38,8 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
-    this.setState({max:this.state.userMax});
-    this.setState({min:this.state.userMin});
+    this.setMaxAndMinStatesToUserInput();
+    // this.generateRandomNumber();
   }
 
   compareNumbers(){
@@ -94,6 +94,15 @@ class Application extends React.Component {
     this.refs.inputField.value = '';
   }
 
+  setMaxAndMinStatesToUserInput(){
+    this.setState({max:this.state.userMax}, ()=>{
+      this.generateRandomNumber();
+    });
+    this.setState({min:this.state.userMin}, ()=>{
+      this.generateRandomNumber();
+    });
+  }
+
   setUserNumberState(e){
     let userNumber = parseInt(e.target.value);
     if (isNaN(userNumber)) {
@@ -135,7 +144,7 @@ class Application extends React.Component {
           placeholder="Your best guess..."
           />
         <SubmitGuessButton
-          className="submit-guess-button" 
+          className="submit-guess-button"
           handleClick={()=>this.compareNumbers()}
           />
         <ClearInputButton/>
