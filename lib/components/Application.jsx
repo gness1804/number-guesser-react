@@ -34,7 +34,6 @@ class Application extends React.Component {
   }
 
   clearInputField(){
-    // console.log("test");
     document.querySelector('.input-field').value = '';
     this.setState({userNumber:null});
   }
@@ -114,7 +113,7 @@ class Application extends React.Component {
     let userNumber = parseInt(e.target.value);
     if (isNaN(userNumber)) {
       alert('Please choose a valid number.');
-      e.target.value = ''; //TODO: break out into own function
+      this.clearInputField();
       return;
     }
     else {
