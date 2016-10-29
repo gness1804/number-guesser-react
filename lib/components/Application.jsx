@@ -32,6 +32,9 @@ class Application extends React.Component {
       // });
       this.generateRandomNumber();
     }
+    else {
+      this.evaluateTheTwoNumbers();
+    }
     // console.log(this.state.computerNumber);
   } //end of compareNumbers
 
