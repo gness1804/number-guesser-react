@@ -34,8 +34,9 @@ class Application extends React.Component {
   }
 
   clearInputField(){
-    console.log("test");
-    this.refs.inputField.value = '';
+    // console.log("test");
+    document.querySelector('.input-field').value = '';
+    this.setState({userNumber:null});
   }
 
   componentDidMount(){
@@ -48,12 +49,12 @@ class Application extends React.Component {
 
   compareNumbers(){
     if (this.state.computerNumber === null) {
-      this.generateRandomNumber();
+      this.generateRandomNumber(this.clearInputField());
     }
     else {
       this.evaluateTheTwoNumbers();
     }
-    this.clearInputField();
+    // this.clearInputField();
   } //end of compareNumbers
 
   evaluateTheTwoNumbers(){
