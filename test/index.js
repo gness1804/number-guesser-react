@@ -1,1 +1,1 @@
-var assert = require('chai');
+require('./Application-tests.js');
