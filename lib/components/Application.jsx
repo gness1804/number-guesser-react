@@ -49,7 +49,7 @@ class Application extends React.Component {
       this.setMaxAndMinStatesToUserInput();
     }
     else {
-      alert('Your chosen min must be below your max.');
+      alert('Your chosen min must be less than your max.');
       document.getElementById('user-min-input').value = '';
       document.getElementById('user-max-input').value = '';
       return;
