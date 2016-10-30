@@ -1,1 +1,1 @@
-import {assert} from "chai";
+var assert = require('chai');
