@@ -45,8 +45,16 @@ class Application extends React.Component {
   } //end of componentDidMount
 
   adjustMaxMinToUserInput(){
-    this.setMaxAndMinStatesToUserInput();
-  }
+    if (this.state.userMin < this.state.userMax) {
+      this.setMaxAndMinStatesToUserInput();
+    }
+    else {
+      alert('Your chosen min must be less than your max.');
+      document.getElementById('user-min-input').value = '';
+      document.getElementById('user-max-input').value = '';
+      return;
+    }
+  } //end of adjustMaxMinToUserInput
 
   compareNumbers(){
     if (this.state.computerNumber === null) {
@@ -180,11 +188,13 @@ class Application extends React.Component {
         <ResetGameButton handleClick={()=>this.resetGameToInitialState()}
           isDisabled={this.state.resetButtonDisabled}/>
         <UserCustomMinInput
+          id="user-min-input"
           placeholder="Enter your new minimum."
           ref="UserCustomMinInput"
           handleChange={(e)=>{this.addUserMin(e)}}
           />
         <UserCustomMaxInput
+          id="user-max-input"
           placeholder="Enter your new maximum."
           ref="UserCustomMaxInput"
           handleChange={(e)=>this.addUserMax(e)}
