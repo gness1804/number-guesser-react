@@ -1,23 +1,32 @@
 @import 'variables.scss';
 @import 'mixins.scss';
 
-@media screen and (max-width: 800px) { /* for smartphones and tablets */
+html {
+  background: $main-background;
+}
+
+#container-main {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+input {
+  margin: 20px auto;
+}
+
+button {
+  display: block;
+  margin: 15px auto;
+}
+
+@media screen and (min-width: 800px) { /* for desktop*/
 
   #container-main {
-    text-align: center;
+
   }
 
-  h1 {
-    text-align: center;
-  }
-
-  input {
-    margin: 20px auto;
-  }
-
-  button {
-    display: block;
-    margin: 15px auto;
-  }
 
 } //end of media query
