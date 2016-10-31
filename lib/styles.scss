@@ -3,6 +3,8 @@
 
 html {
   background: $main-background;
+  background-size: $cover-all;
+  font-family: $main-font;
 }
 
 #container-main {
@@ -20,6 +22,10 @@ input {
 button {
   display: block;
   margin: 15px auto;
+}
+
+.last-guess {
+  font-style: italic;
 }
 
 @media screen and (min-width: 800px) { /* for desktop*/
