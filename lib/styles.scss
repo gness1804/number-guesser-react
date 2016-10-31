@@ -31,8 +31,22 @@ button {
 @media screen and (min-width: 800px) { /* for desktop*/
 
   #container-main {
-
+    text-align: none;
   }
 
+  input {
+    margin: 0 5px;
+  }
+
+  button {
+    display: inline-block;
+    margin: 20px 10px;
+
+    &:hover{
+      background-color: white;
+      cursor: pointer;
+    }
+
+  } //end of button
 
 } //end of media query
