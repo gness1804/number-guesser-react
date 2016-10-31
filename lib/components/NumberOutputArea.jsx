@@ -159,7 +159,7 @@ class NumberOutputArea extends React.Component {
     return (
       <div>
         <p>Min: {this.state.min} Max: {this.state.max}</p>
-        <p>Your last guess was...</p>
+        <p className="last-guess">Your last guess was...</p>
         <p id="number-output-field">{this.state.userNumber}</p>
         <p>{this.state.messageToUser}</p>
           <Input
