@@ -38,10 +38,6 @@ class NumberOutputArea extends React.Component {
     this.disableButtons();
   }
 
-  componentDidMount(){
-
-  } //end of componentDidMount
-
   adjustMaxMinToUserInput(){
     if (this.state.userMin < this.state.userMax) {
       this.setMaxAndMinStatesToUserInput();
