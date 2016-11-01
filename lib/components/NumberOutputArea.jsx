@@ -33,8 +33,13 @@ class NumberOutputArea extends React.Component {
     this.setState({userMin:userMin});
   }
 
+  clearGivenField(field){
+    document.querySelector(field).value = '';
+  } //end of clearInputField
+
   clearInputField(){
-    document.querySelector('.input-field').value = '';
+    // this.clearInput();
+    this.clearGivenField('.input-field');
     this.disableButtons();
   }
 
