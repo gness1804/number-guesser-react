@@ -38,7 +38,6 @@ class NumberOutputArea extends React.Component {
   } //end of clearInputField
 
   clearInputField(){
-    // this.clearInput();
     this.clearGivenField('.input-field');
     this.disableButtons();
   }
@@ -49,8 +48,8 @@ class NumberOutputArea extends React.Component {
     }
     else {
       alert('Your chosen min must be less than your max.');
-      document.getElementById('user-min-input').value = '';
-      document.getElementById('user-max-input').value = '';
+      this.clearGivenField('#user-min-input');
+      this.clearGivenField('#user-max-input');
       return;
     }
   } //end of adjustMaxMinToUserInput
@@ -79,19 +78,19 @@ class NumberOutputArea extends React.Component {
     let userNumber = this.state.userNumber;
     let computerNumber = this.state.computerNumber;
     if (userNumber > this.state.max) {
-      this.setState({messageToUser: "Your number is above the accepted range."});
+      this.tellUser("Your number is above the accepted range.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < this.state.min) {
-      this.setState({messageToUser: "Your number is below the accepted range."});
+      this.tellUser("Your number is below the accepted range.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < computerNumber) {
-      this.setState({messageToUser: "Sorry, your guess is too low. Please try again."});
+      this.tellUser("Sorry, your guess is too low. Please try again.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber > computerNumber) {
-      this.setState({messageToUser: "Sorry, your guess is too high. Please try again."});
+      this.tellUser("Sorry, your guess is too high. Please try again.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber === computerNumber) {
@@ -99,6 +98,10 @@ class NumberOutputArea extends React.Component {
       this.startNewGameAfterWin();
     }
   } //end of evaluateTheTwoNumbers
+
+  tellUser(message){
+    this.setState({messageToUser:message});
+  }
 
   generateRandomNumber(){
     let min = this.state.min;
