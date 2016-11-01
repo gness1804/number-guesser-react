@@ -106,10 +106,14 @@ class NumberOutputArea extends React.Component {
   generateRandomNumber(){
     let min = this.state.min;
     let max = this.state.max;
-    let newComputerNumber = Math.floor(Math.random() * (max - min) + min);
+    let newComputerNumber = this.randomize(min, max);
     this.setState({computerNumber: newComputerNumber}, ()=>{
       this.evaluateTheTwoNumbers();
     });
+  }
+
+  randomize(min, max){
+    return Math.floor(Math.random() * (max - min) + min);
   }
 
   resetGameToInitialState(){
@@ -137,11 +141,11 @@ class NumberOutputArea extends React.Component {
       thereIsStuffInTheInputField: e.target.value.length > 0
     };
 
+    let userNumber = parseInt(e.target.value, 10);
+
     if (items.thereIsStuffInTheInputField) {
       this.enableButtons();
     }
-
-    let userNumber = parseInt(e.target.value, 10);
 
     if (isNaN(userNumber)) {
       alert('Please choose a valid number.');
