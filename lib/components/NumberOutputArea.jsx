@@ -117,12 +117,16 @@ class NumberOutputArea extends React.Component {
   }
 
   resetGameToInitialState(){
-    this.setState({userNumber: null});
-    this.setState({computerNumber: null});
-    this.setState({messageToUser: ''});
+    this.clearNumbers();
     this.setState({min: 0});
     this.setState({max: 100});
     this.clearInputField();
+  }
+
+  clearNumbers(){
+    this.setState({userNumber: null});
+    this.setState({computerNumber: null});
+    this.setState({messageToUser: ''});
   }
 
   setMaxAndMinStatesToUserInput(){
@@ -159,9 +163,7 @@ class NumberOutputArea extends React.Component {
   } //end of setUserNumberState
 
   startNewGameAfterWin(){
-    this.setState({userNumber: null});
-    this.setState({computerNumber: null});
-    this.setState({messageToUser: ''});
+    this.clearNumbers();
     this.setState({min: this.state.min - 10});
     this.setState({max: this.state.max + 10});
     this.clearInputField();
