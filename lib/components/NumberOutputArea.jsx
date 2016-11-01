@@ -33,8 +33,12 @@ class NumberOutputArea extends React.Component {
     this.setState({userMin:userMin});
   }
 
+  clearGivenField(field){
+    document.querySelector(field).value = '';
+  } //end of clearInputField
+
   clearInputField(){
-    document.querySelector('.input-field').value = '';
+    this.clearGivenField('.input-field');
     this.disableButtons();
   }
 
@@ -44,8 +48,8 @@ class NumberOutputArea extends React.Component {
     }
     else {
       alert('Your chosen min must be less than your max.');
-      document.getElementById('user-min-input').value = '';
-      document.getElementById('user-max-input').value = '';
+      this.clearGivenField('#user-min-input');
+      this.clearGivenField('#user-max-input');
       return;
     }
   } //end of adjustMaxMinToUserInput
@@ -74,19 +78,19 @@ class NumberOutputArea extends React.Component {
     let userNumber = this.state.userNumber;
     let computerNumber = this.state.computerNumber;
     if (userNumber > this.state.max) {
-      this.setState({messageToUser: "Your number is above the accepted range."});
+      this.tellUser("Your number is above the accepted range.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < this.state.min) {
-      this.setState({messageToUser: "Your number is below the accepted range."});
+      this.tellUser("Your number is below the accepted range.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber < computerNumber) {
-      this.setState({messageToUser: "Sorry, your guess is too low. Please try again."});
+      this.tellUser("Sorry, your guess is too low. Please try again.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber > computerNumber) {
-      this.setState({messageToUser: "Sorry, your guess is too high. Please try again."});
+      this.tellUser("Sorry, your guess is too high. Please try again.");
       console.log("The computer chose: " + computerNumber);
     }
     else if (userNumber === computerNumber) {
@@ -95,22 +99,34 @@ class NumberOutputArea extends React.Component {
     }
   } //end of evaluateTheTwoNumbers
 
+  tellUser(message){
+    this.setState({messageToUser:message});
+  }
+
   generateRandomNumber(){
     let min = this.state.min;
     let max = this.state.max;
-    let newComputerNumber = Math.floor(Math.random() * (max - min) + min);
+    let newComputerNumber = this.randomize(min, max);
     this.setState({computerNumber: newComputerNumber}, ()=>{
       this.evaluateTheTwoNumbers();
     });
   }
 
+  randomize(min, max){
+    return Math.floor(Math.random() * (max - min) + min);
+  }
+
   resetGameToInitialState(){
-    this.setState({userNumber: null});
-    this.setState({computerNumber: null});
-    this.setState({messageToUser: ''});
+    this.clearNumbers();
     this.setState({min: 0});
     this.setState({max: 100});
     this.clearInputField();
+  }
+
+  clearNumbers(){
+    this.setState({userNumber: null});
+    this.setState({computerNumber: null});
+    this.setState({messageToUser: ''});
   }
 
   setMaxAndMinStatesToUserInput(){
@@ -129,11 +145,11 @@ class NumberOutputArea extends React.Component {
       thereIsStuffInTheInputField: e.target.value.length > 0
     };
 
+    let userNumber = parseInt(e.target.value, 10);
+
     if (items.thereIsStuffInTheInputField) {
       this.enableButtons();
     }
-
-    let userNumber = parseInt(e.target.value, 10);
 
     if (isNaN(userNumber)) {
       alert('Please choose a valid number.');
@@ -147,9 +163,7 @@ class NumberOutputArea extends React.Component {
   } //end of setUserNumberState
 
   startNewGameAfterWin(){
-    this.setState({userNumber: null});
-    this.setState({computerNumber: null});
-    this.setState({messageToUser: ''});
+    this.clearNumbers();
     this.setState({min: this.state.min - 10});
     this.setState({max: this.state.max + 10});
     this.clearInputField();
