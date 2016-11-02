@@ -55,13 +55,21 @@ class NumberOutputArea extends React.Component {
   } //end of adjustMaxMinToUserInput
 
   compareNumbers(){
+    let userNumber = document.querySelector('.input-field').value;
+
+    if (userNumber === '' || isNaN(userNumber)) {
+      alert('Please choose a valid number.');
+      this.clearInputField();
+      return;
+    }
+
     if (this.state.computerNumber === null) {
       this.generateRandomNumber(this.clearInputField());
     }
     else {
       this.evaluateTheTwoNumbers();
     }
-    // this.clearInputField();
+
   } //end of compareNumbers
 
   disableButtons(){
@@ -152,8 +160,6 @@ class NumberOutputArea extends React.Component {
     }
 
     if (isNaN(userNumber)) {
-      alert('Please choose a valid number.');
-      this.clearInputField();
       return;
     }
     else {
