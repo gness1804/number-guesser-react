@@ -29392,6 +29392,60 @@
 	
 	var _NumberOutputArea2 = _interopRequireDefault(_NumberOutputArea);
 	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Application = function (_React$Component) {
+	  _inherits(Application, _React$Component);
+	
+	  function Application(props) {
+	    _classCallCheck(this, Application);
+	
+	    return _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this, props));
+	  } //end of constructor
+	
+	  _createClass(Application, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'container-main' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          'Number Guesser in React'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'number-output-area' },
+	          _react2.default.createElement(_NumberOutputArea2.default, null)
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return Application;
+	}(_react2.default.Component); //end of Application
+	
+	module.exports = Application;
+
+/***/ },
+/* 470 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
 	var _Input = __webpack_require__(471);
 	
 	var _Input2 = _interopRequireDefault(_Input);
@@ -29428,13 +29482,13 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Application = function (_React$Component) {
-	  _inherits(Application, _React$Component);
+	var NumberOutputArea = function (_React$Component) {
+	  _inherits(NumberOutputArea, _React$Component);
 	
-	  function Application(props) {
-	    _classCallCheck(this, Application);
+	  function NumberOutputArea(props) {
+	    _classCallCheck(this, NumberOutputArea);
 	
-	    var _this = _possibleConstructorReturn(this, (Application.__proto__ || Object.getPrototypeOf(Application)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (NumberOutputArea.__proto__ || Object.getPrototypeOf(NumberOutputArea)).call(this, props));
 	
 	    _this.state = {
 	      userNumber: null,
@@ -29447,11 +29501,10 @@
 	      clearButtonDisabled: true,
 	      resetButtonDisabled: true
 	    };
-	
 	    return _this;
-	  } //end of constructor
+	  }
 	
-	  _createClass(Application, [{
+	  _createClass(NumberOutputArea, [{
 	    key: 'addUserMax',
 	    value: function addUserMax(e) {
 	      var userMax = parseInt(e.target.value, 10);
@@ -29464,29 +29517,46 @@
 	      this.setState({ userMin: userMin });
 	    }
 	  }, {
+	    key: 'clearGivenField',
+	    value: function clearGivenField(field) {
+	      document.querySelector(field).value = '';
+	    } //end of clearInputField
+	
+	  }, {
 	    key: 'clearInputField',
 	    value: function clearInputField() {
-	      document.querySelector('.input-field').value = '';
+	      this.clearGivenField('.input-field');
 	      this.disableButtons();
 	    }
 	  }, {
-	    key: 'componentDidMount',
-	    value: function componentDidMount() {} //end of componentDidMount
-	
-	  }, {
 	    key: 'adjustMaxMinToUserInput',
 	    value: function adjustMaxMinToUserInput() {
-	      this.setMaxAndMinStatesToUserInput();
-	    }
+	      if (this.state.userMin < this.state.userMax) {
+	        this.setMaxAndMinStatesToUserInput();
+	      } else {
+	        alert('Your chosen min must be less than your max.');
+	        this.clearGivenField('#user-min-input');
+	        this.clearGivenField('#user-max-input');
+	        return;
+	      }
+	    } //end of adjustMaxMinToUserInput
+	
 	  }, {
 	    key: 'compareNumbers',
 	    value: function compareNumbers() {
+	      var userNumber = document.querySelector('.input-field').value;
+	
+	      if (userNumber === '' || isNaN(userNumber)) {
+	        alert('Please choose a valid number.');
+	        this.clearInputField();
+	        return;
+	      }
+	
 	      if (this.state.computerNumber === null) {
 	        this.generateRandomNumber(this.clearInputField());
 	      } else {
 	        this.evaluateTheTwoNumbers();
 	      }
-	      // this.clearInputField();
 	    } //end of compareNumbers
 	
 	  }, {
@@ -29507,16 +29577,16 @@
 	      var userNumber = this.state.userNumber;
 	      var computerNumber = this.state.computerNumber;
 	      if (userNumber > this.state.max) {
-	        this.setState({ messageToUser: "Your number is above the accepted range." });
+	        this.tellUser("Your number is above the accepted range.");
 	        console.log("The computer chose: " + computerNumber);
 	      } else if (userNumber < this.state.min) {
-	        this.setState({ messageToUser: "Your number is below the accepted range." });
+	        this.tellUser("Your number is below the accepted range.");
 	        console.log("The computer chose: " + computerNumber);
 	      } else if (userNumber < computerNumber) {
-	        this.setState({ messageToUser: "Sorry, your guess is too low. Please try again." });
+	        this.tellUser("Sorry, your guess is too low. Please try again.");
 	        console.log("The computer chose: " + computerNumber);
 	      } else if (userNumber > computerNumber) {
-	        this.setState({ messageToUser: "Sorry, your guess is too high. Please try again." });
+	        this.tellUser("Sorry, your guess is too high. Please try again.");
 	        console.log("The computer chose: " + computerNumber);
 	      } else if (userNumber === computerNumber) {
 	        alert('You win! Now get ready for a new challenge.');
@@ -29525,26 +29595,41 @@
 	    } //end of evaluateTheTwoNumbers
 	
 	  }, {
+	    key: 'tellUser',
+	    value: function tellUser(message) {
+	      this.setState({ messageToUser: message });
+	    }
+	  }, {
 	    key: 'generateRandomNumber',
 	    value: function generateRandomNumber() {
 	      var _this2 = this;
 	
 	      var min = this.state.min;
 	      var max = this.state.max;
-	      var newComputerNumber = Math.floor(Math.random() * (max - min) + min);
+	      var newComputerNumber = this.randomize(min, max);
 	      this.setState({ computerNumber: newComputerNumber }, function () {
 	        _this2.evaluateTheTwoNumbers();
 	      });
 	    }
 	  }, {
+	    key: 'randomize',
+	    value: function randomize(min, max) {
+	      return Math.floor(Math.random() * (max - min) + min);
+	    }
+	  }, {
 	    key: 'resetGameToInitialState',
 	    value: function resetGameToInitialState() {
-	      this.setState({ userNumber: null });
-	      this.setState({ computerNumber: null });
-	      this.setState({ messageToUser: '' });
+	      this.clearNumbers();
 	      this.setState({ min: 0 });
 	      this.setState({ max: 100 });
 	      this.clearInputField();
+	    }
+	  }, {
+	    key: 'clearNumbers',
+	    value: function clearNumbers() {
+	      this.setState({ userNumber: null });
+	      this.setState({ computerNumber: null });
+	      this.setState({ messageToUser: '' });
 	    }
 	  }, {
 	    key: 'setMaxAndMinStatesToUserInput',
@@ -29567,15 +29652,13 @@
 	        thereIsStuffInTheInputField: e.target.value.length > 0
 	      };
 	
+	      var userNumber = parseInt(e.target.value, 10);
+	
 	      if (items.thereIsStuffInTheInputField) {
 	        this.enableButtons();
 	      }
 	
-	      var userNumber = parseInt(e.target.value, 10);
-	
 	      if (isNaN(userNumber)) {
-	        alert('Please choose a valid number.');
-	        this.clearInputField();
 	        return;
 	      } else {
 	        this.setState({ userNumber: userNumber });
@@ -29585,9 +29668,7 @@
 	  }, {
 	    key: 'startNewGameAfterWin',
 	    value: function startNewGameAfterWin() {
-	      this.setState({ userNumber: null });
-	      this.setState({ computerNumber: null });
-	      this.setState({ messageToUser: '' });
+	      this.clearNumbers();
 	      this.setState({ min: this.state.min - 10 });
 	      this.setState({ max: this.state.max + 10 });
 	      this.clearInputField();
@@ -29599,21 +29680,29 @@
 	
 	      return _react2.default.createElement(
 	        'div',
-	        { id: 'container-main' },
+	        null,
 	        _react2.default.createElement(
-	          'h1',
+	          'p',
 	          null,
-	          'Number Guesser in React'
+	          'Min: ',
+	          this.state.min,
+	          ' Max: ',
+	          this.state.max
 	        ),
 	        _react2.default.createElement(
-	          'div',
-	          { className: 'number-output-area' },
-	          _react2.default.createElement(_NumberOutputArea2.default, {
-	            max: this.state.max,
-	            min: this.state.min,
-	            userNumber: this.state.userNumber,
-	            messageToUser: this.state.messageToUser
-	          })
+	          'p',
+	          { className: 'last-guess' },
+	          'Your last guess was...'
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          { id: 'number-output-field' },
+	          this.state.userNumber
+	        ),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.state.messageToUser
 	        ),
 	        _react2.default.createElement(_Input2.default, {
 	          className: 'input-field',
@@ -29638,6 +29727,7 @@
 	          },
 	          isDisabled: this.state.resetButtonDisabled }),
 	        _react2.default.createElement(_UserCustomMinInput2.default, {
+	          id: 'user-min-input',
 	          placeholder: 'Enter your new minimum.',
 	          ref: 'UserCustomMinInput',
 	          handleChange: function handleChange(e) {
@@ -29645,6 +29735,7 @@
 	          }
 	        }),
 	        _react2.default.createElement(_UserCustomMaxInput2.default, {
+	          id: 'user-max-input',
 	          placeholder: 'Enter your new maximum.',
 	          ref: 'UserCustomMaxInput',
 	          handleChange: function handleChange(e) {
@@ -29654,73 +29745,6 @@
 	        _react2.default.createElement(_SubmitCustomMaxMin2.default, { handleClick: function handleClick() {
 	            return _this4.adjustMaxMinToUserInput();
 	          } })
-	      );
-	    }
-	  }]);
-	
-	  return Application;
-	}(_react2.default.Component); //end of Application
-	
-	module.exports = Application;
-
-/***/ },
-/* 470 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var NumberOutputArea = function (_React$Component) {
-	  _inherits(NumberOutputArea, _React$Component);
-	
-	  function NumberOutputArea(props) {
-	    _classCallCheck(this, NumberOutputArea);
-	
-	    return _possibleConstructorReturn(this, (NumberOutputArea.__proto__ || Object.getPrototypeOf(NumberOutputArea)).call(this, props));
-	  }
-	
-	  _createClass(NumberOutputArea, [{
-	    key: "render",
-	    value: function render() {
-	      return _react2.default.createElement(
-	        "div",
-	        null,
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Min: ",
-	          this.props.min,
-	          " Max: ",
-	          this.props.max
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          "Your last guess was..."
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          { id: "number-output-field" },
-	          this.props.userNumber
-	        ),
-	        _react2.default.createElement(
-	          "p",
-	          null,
-	          this.props.messageToUser
-	        )
 	      );
 	    }
 	  }]);
@@ -29976,7 +30000,7 @@
 	  _createClass(UserCustomMaxInput, [{
 	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement("input", { placeholder: this.props.placeholder, type: "number", onChange: this.props.handleChange });
+	      return _react2.default.createElement("input", { id: this.props.id, placeholder: this.props.placeholder, type: "number", onChange: this.props.handleChange });
 	    }
 	  }]);
 	
@@ -30022,7 +30046,7 @@
 	  _createClass(UserCustomMinInput, [{
 	    key: "render",
 	    value: function render() {
-	      return _react2.default.createElement("input", { placeholder: this.props.placeholder, type: "number", onChange: this.props.handleChange });
+	      return _react2.default.createElement("input", { id: this.props.id, placeholder: this.props.placeholder, type: "number", onChange: this.props.handleChange });
 	    }
 	  }]);
 	
@@ -30120,7 +30144,7 @@
 	
 	
 	// module
-	exports.push([module.id, "@media screen and (max-width: 800px) {\n  /* for smartphones and tablets */\n  #container-main {\n    text-align: center; }\n  h1 {\n    text-align: center; }\n  input {\n    margin: 20px auto; }\n  button {\n    display: block;\n    margin: 15px auto; } }\n", ""]);
+	exports.push([module.id, "html {\n  background: linear-gradient(to bottom, #37e2e2, #83ee87);\n  background-size: 100vw 100vh;\n  font-family: \"Varela Round\", sans-serif; }\n\n#container-main {\n  text-align: center; }\n\nh1 {\n  text-align: center; }\n\ninput {\n  margin: 20px auto; }\n\nbutton {\n  display: block;\n  margin: 15px auto; }\n\n.last-guess {\n  font-style: italic; }\n\n#number-output-field {\n  font-size: 30px; }\n\n@media screen and (min-width: 800px) {\n  /* for desktop*/\n  #container-main {\n    text-align: none; }\n  input {\n    margin: 0 5px; }\n  button {\n    display: inline-block;\n    margin: 20px 10px; }\n    button:hover {\n      background-color: white;\n      cursor: pointer; } }\n", ""]);
 	
 	// exports
 
